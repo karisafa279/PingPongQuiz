@@ -1,18 +1,19 @@
 from flask import Flask
 import time
-import jsonify
 import os
 import random
+import jsonify
 
 app = Flask(__name__)
 
 bola = 0
 jugador1 = 0
 jugador2 = 0
+matriz=[]
 
 @app.route('/iniciaJuego', methods= ['GET'])
 def iniciaJuego():
-    global bola, jugador1,jugador2
+    global bola, jugador1,jugador2,matriz
     while (bola < 3):
         string = ""
         b = 0
@@ -169,7 +170,7 @@ def iniciaJuego():
         else:
             print("Jugador dos Gano la partida")
 
-    return jsonify(matriz)
+    return "Juego terminado"
 
 
 
