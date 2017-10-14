@@ -164,10 +164,10 @@ def iniciaJuego():
                     string = ""
 
                 time.sleep(0.10000)
-                print("----------------------------------------------------------------")
-                print("----------------------------------------------------------------")
-                print("----------------------------------------------------------------")
-                print("----------------------------------------------------------------")
+                print("-------------------------------------------------------------------------")
+                print("-------------------------------------------------------------------------")
+                print("-------------------------------------------------------------------------")
+                print("-------------------------------------------------------------------------")
                 ##os.system('cls')
             estadoMatriz = matriz
             #Dependiendo del movimiento de la bola antes de hacer un punto se sabe a que jugador le corresponde el punto
@@ -193,11 +193,12 @@ def iniciaJuego():
                 print("Jugador dos Gano la partida")
                 respuesta="Jugador dos Gano la partida"
 
-    return jsonify("Falta un jugador")
+    return jsonify("Esperando para inciar partida")
 
 
 
 @app.route('/resultadoJuego/<int:playerId>', methods= ['GET'])
+
 def resultado(playerId):
     return jsonify(respuesta)
 
@@ -208,4 +209,4 @@ def resultado(playerId):
 
 
 if __name__ == "__main__":
-    app.run(debug=True,host='0.0.0.0')
+    app.run(host='0.0.0.0')
