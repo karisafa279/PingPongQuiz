@@ -2,8 +2,8 @@
 <project version="4">
   <component name="WebServers">
     <option name="servers">
-      <webServer id="881406bb-b487-49e2-b012-b9f015a0e2eb" name="Casa" url="http://192.168.0.10">
-        <fileTransfer host="192.168.0.10" port="22" rootFolder="/home/webservice" accessType="SFTP">
+      <webServer id="881406bb-b487-49e2-b012-b9f015a0e2eb" name="Casa" url="http://192.168.0.8">
+        <fileTransfer host="192.168.0.8" port="22" rootFolder="/home/webservice" accessType="SFTP">
           <advancedOptions>
             <advancedOptions dataProtectionLevel="Private" />
           </advancedOptions>

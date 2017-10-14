@@ -14,27 +14,25 @@ respuestaJugador1 = []
 respuestaJugador2 = []
 player1 = 0
 player2 = 0
+respuesta = ""
 
 @app.route('/iniciaJuego', methods= ['POST'])
 def iniciaJuego():
-    global bola, jugador1,jugador2,matriz,respuestaJugador1,respuestaJugador2,player1,player2
+    global bola, jugador1,jugador2,matriz,respuestaJugador1,respuestaJugador2,player1,player2,respuesta
 
     playerID = request.form['id']
-    if player1 == 0 and player2 == 0:
-        if playerID == 1:
-            player1 = 1
-            player2 = 2
-        else:
-            player1 = 2
-            player2 = 1
-    else:
 
+    if player1 == 0:
+        player1 = playerID
+    elif player2 == 0:
+        player2 = playerID
+    else:
         while (bola < 3):
             string = ""
             b = 0
             c = 0
             alefil1 = 0
-            alecol2 = 0		
+            alecol2 = 0
             flagp = False  # bandera que se usa para saber que ninguno de los dos jugadores a ganado, se vuelve true cuando se toca un borde.
             flagb = False  # bandera que se usa como condicion para encontrar la bola.
             flagmb = 0     # bandera que usa 0,1,2,3 como posibles movimientos de la bola
@@ -42,7 +40,7 @@ def iniciaJuego():
 
             print("Juego numero " + str(bola + 1))
             time.sleep(2)
-			##os.system('cls')
+            ##os.system('cls')
             matriz = [['-', '-', '-', '-', '-', '-', '-', '-', '-', '-']
                 , ['|', '', '', 'X', 'X', 'X', '', '', '', '|'], ['|', '', '', '', '', '', '', '', '', '|'],
                       ['|', '', '', '', '', '', '', '', '', '|']
@@ -83,10 +81,10 @@ def iniciaJuego():
                     for j in range(10):  # El siguiente codigo es para mover la bola una vez encontrada
                         if (matriz[i][j] == 'O' and flagb == False):
                             matriz[i][j] = ''  # Elimina la bola de la posicion actual
-							
-							#Este codigo se usa para ver si la bola pega ya sea en un borde lateral o en la paleta permitiendole cambiar la direccion
+
+                            #Este codigo se usa para ver si la bola pega ya sea en un borde lateral o en la paleta permitiendole cambiar la direccion
                             if (matriz[i + 1][j + 1] == '|' and flagmb == 0):
-                                flagmb = 1 
+                                flagmb = 1
                             elif (matriz[i + 1][j + 1] == 'X' and flagmb == 0):
                                 flagmb = 3
 
@@ -121,28 +119,28 @@ def iniciaJuego():
                                 matriz[i - 1][j + 1] = 'O'
                             else:
                                 matriz[i][j] = 'O'
-								
-							#Movimeinto de las paletas segun el movimiento de la bola.
+
+                            #Movimeinto de las paletas segun el movimiento de la bola.
                             if (cont % 2 == 0): #Valida que el contador sea par para mover la paleta
-								#Movimeinto de la paleta de abajo hacia la derecha
+                                #Movimeinto de la paleta de abajo hacia la derecha
                                 if (flagmb == 0 and matriz[30][c + 1] == ''):
                                     matriz[30][c + 1] = 'X'
                                     matriz[30][c] = 'X'
                                     matriz[30][c - 1] = 'X'
                                     matriz[30][c - 2] = ''
-								#Movimeinto de la paleta de abajo hacia la izquierda	
+                                #Movimeinto de la paleta de abajo hacia la izquierda
                                 elif (flagmb == 1 and matriz[30][c - 3] == ''):
                                     matriz[30][c - 3] = 'X'
                                     matriz[30][c - 2] = 'X'
                                     matriz[30][c - 1] = 'X'
                                     matriz[30][c] = ''
-								#Movimeinto de la paleta de arriba hacia la izquierda
+                                #Movimeinto de la paleta de arriba hacia la izquierda
                                 elif (flagmb == 2 and matriz[1][b - 3] == ''):
                                     matriz[1][b - 3] = 'X'
                                     matriz[1][b - 2] = 'X'
                                     matriz[1][b - 1] = 'X'
                                     matriz[1][b] = ''
-								#Movimeinto de la paleta de arriba hacia la derecha
+                                #Movimeinto de la paleta de arriba hacia la derecha
                                 elif (flagmb == 3 and matriz[1][b + 1] == ''):
                                     matriz[1][b + 1] = 'X'
                                     matriz[1][b] = 'X'
@@ -152,7 +150,7 @@ def iniciaJuego():
                             flagb = True #Permite evitar que encuentre de nuevo la bola despues de un movimiento
                             cont = cont + 1
                             if (matriz[i + 1][j - 1] == '-' or matriz[i + 1][j + 1] == '-' or matriz[i - 1][j + 1] == '-' or
-                                        matriz[i - 1][j - 1] == '-'): 
+                                        matriz[i - 1][j - 1] == '-'):
                                 flagp = True  # Si alguien gano pasa a ser True para que se salga del ciclo de la partida.
 
                 flagb = False #Se vuelve a pasar a false para que vuelva a buscar la bola en el proximo moviemiento
@@ -172,37 +170,36 @@ def iniciaJuego():
                 print("----------------------------------------------------------------")
                 ##os.system('cls')
             estadoMatriz = matriz
-			#Dependiendo del movimiento de la bola antes de hacer un punto se sabe a que jugador le corresponde el punto
-			#Si la bola iba bajando, punto para el jugador 1
+            #Dependiendo del movimiento de la bola antes de hacer un punto se sabe a que jugador le corresponde el punto
+            #Si la bola iba bajando, punto para el jugador 1
             if (flagmb == 0 or flagmb == 1):
                 jugador1 = jugador1 + 1
                 print("Jugador uno gano 1 punto")
-			#Si la bola iba subiendo, punto para el jugador 2	
+            #Si la bola iba subiendo, punto para el jugador 2
             elif (flagmb == 2 or flagmb == 3):
                 jugador2 = jugador2 + 1
                 print("Jugador dos gano 1 punto")
 
-                
+
                 time.sleep(2)
                 ##os.system('cls')
                 ##cada vez que la bandera flag
 
             bola = bola + 1
-			
             if (jugador1 > jugador2):
                 print("Jugador uno Gano la partida")
+                respuesta = "Jugador uno Gano la partida"
             else:
                 print("Jugador dos Gano la partida")
-    return jsonify("Juego iniciado")
+                respuesta="Jugador dos Gano la partida"
+
+    return jsonify("Falta un jugador")
 
 
 
 @app.route('/resultadoJuego/<int:playerId>', methods= ['GET'])
 def resultado(playerId):
-    if playerId == 1:
-        return respuestaJugador1
-    else:
-        return respuestaJugador2
+    return jsonify(respuesta)
 
 
 
