@@ -2,11 +2,8 @@ import requests,json
 
 def getGame():
     try:
-        request = requests.get("http://192.168.0.10:5000/iniciaJuego")
-        gameJSONResponse = json.dumps(request.json)
-        parsedJSON = json.loads(gameJSONResponse)
-        print(parsedJSON)
-    except requests.exception.RequestException:
+        request = requests.post("http://10.2.3.195:5000/iniciaJuego",data={'id': 1})
+    except requests.RequestException:
         print("Error")
 
-
+getGame()

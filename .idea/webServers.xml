@@ -10,8 +10,8 @@
           <option name="port" value="22" />
         </fileTransfer>
       </webServer>
-      <webServer id="06fcde82-f34d-411d-9b19-abd88802cdfb" name="Externo" url="http://192.168.20.126">
-        <fileTransfer host="192.168.20.126" port="22" accessType="SFTP">
+      <webServer id="06fcde82-f34d-411d-9b19-abd88802cdfb" name="Externo" url="http://10.2.3.195">
+        <fileTransfer host="10.2.3.195" port="22" accessType="SFTP">
           <advancedOptions>
             <advancedOptions dataProtectionLevel="Private" />
           </advancedOptions>
